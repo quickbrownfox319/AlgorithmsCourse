@@ -4,46 +4,41 @@
 #file = open('filename.txt', 'r')
 #inputList.append(file.readline())
 
-test = [3,1,2,6,5]
+test = [6,5,4,3,2,1]
 
 def splitList(inputList):
         length = len(inputList)
-        
+        result = []
 	#base case of 1 element
         if length <= 1:
                 return inputList
 
-        #if length % 2 == 0:
         leftList = [inputList[i] for i in range(0,length/2)]
         rightList = [inputList[j] for j in range(length/2,length)]
         splitList(leftList)
         print "Left list is {}\n".format(leftList)
         splitList(rightList)
         print "Right list is{}\n".format(rightList)
-        mergedList = merge(leftList,rightList)
-        print "Merged list {}\n".format(mergedList)
-
-def merge(right,left):
-        result = [] #will be merged result
-
-        if (len(left) and len(right)) == 1:
-                if left[0] < right[0]:
-                        result.append(left[0])
-                        result.append(right[0])
-                else:
-                        result.append(right[0])
-                        result.append(left[0])
-        elif len(left) != len(right):
-                
         
+        #merge
+        if (len(leftList) and len(rightList)) == 1:
+                if leftList[0] < rightList[0]:
+                        result.append(leftList[0])
+                        result.append(rightList[0])
+                else:
+                        #HERE BE INVERSIONS
+                        result.append(rightList[0])
+                        result.append(leftList[0])
+#        elif len(leftList) != len(rightList):
         else:
-                for i in left:
-                        if left[i] < right[i]:
-                                result.append(left[i])
-                                result.append(right[i])
+                for i in leftList:
+                        if leftList[i] < rightList[i]:
+                                result.append(leftList[i])
+                                result.append(rightList[i])
                         else:
-                                result.append(right[i])
-                                result.append(left[i])
-        return result
+                                #HERE BE INVERSIONS
+                                result.append(rightList[i])
+                                result.append(leftList[i])
+        print "Merged list {}\n".format(result)
 
 splitList(test)
