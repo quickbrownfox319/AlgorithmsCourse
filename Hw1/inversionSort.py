@@ -4,7 +4,7 @@
 #file = open('filename.txt', 'r')
 #inputList.append(file.readline())
 
-test = [6,5,4,3,2,1]
+test = [3,1,3,5]
 
 def splitList(inputList):
 
@@ -49,6 +49,7 @@ def merge(left, right):
 
     #Keeps result list from overflowing
     while (K < lenK):
+
         #Checks to see if left or right lists are completed
         #Useful for if one list is completely smaller than other and
         #for odd number of elements in a list
@@ -57,11 +58,11 @@ def merge(left, right):
 
         #Compares left list index value to right list index value
         #Appends to resulting list, then increments markers
-        if left[L] < right[R]:
+        if left[L] <= right[R]:
             result.append(left[L])
             L += 1
             K += 1
-        if left[L] > right[R]:
+        elif left[L] >= right[R]:
             result.append(right[R])
             R += 1
             K += 1
@@ -72,7 +73,7 @@ def merge(left, right):
         for i in range(L,lenL):
                 result.append(left[i])
     else:
-        for j in range(K,lenR):
+        for j in range(R,lenR):
                 result.append(right[j])
     return result                    
 
