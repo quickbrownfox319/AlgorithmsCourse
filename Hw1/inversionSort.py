@@ -26,26 +26,28 @@ def splitList(inputList):
 
 def merge(left, right):
         result = []
+        print "LEFT = {}".format(left)
+        print "RIGHT = {}".format(right)
+        #for base case elements of 1
         if (len(left) and len(right)) == 1:
                 if left[0] < right[0]:
                         result.append(left[0])
                         result.append(right[0])
-                        return result
                 else:
                         #HERE BE INVERSIONS
                         result.append(right[0])
                         result.append(left[0])
-                        return result
-        else:
-                for i in left:
+        elif len(left) == len(right):
+                for i in range(0,len(left)-1):
                         if left[i] < right[i]:
                                 result.append(left[i])
                                 result.append(right[i])
-                                return result
                         else:
                                 #HERE BE INVERSIONS
                                 result.append(right[i])
                                 result.append(left[i])
-                                return result
+        return result                    
+
+
 
 splitList(test)
