@@ -1,13 +1,22 @@
-#inputList = []
-#file = open('filename.txt', 'r')
-#inputList.append(file.readline())
+#Inversion Counting with Merge Sort
 
-test = [5,3,4,2,1]
+#test = [5,2,4,2,1]
+
+rawInput = []
+inputList = []
+file = open('IntegerArray.txt', 'r')
+rawInput.append(file.readlines())
+for i in range(len(rawInput)):
+    rawInput[i].strip().split(',')
+    inputList.append(int(rawInput[i]))
+
+file.close()
+
 count = 0
 def splitList(inputList):
 
     ##Splitting Section##
-    print "List to be split {}\n".format(inputList)
+#    print "List to be split {}\n".format(inputList)
     length = len(inputList)
 
 	#Base case of 1 element
@@ -25,7 +34,7 @@ def splitList(inputList):
     ##Merge Section##
     #Call merge function using recursively split lists
     mergedList = merge(subLeft, subRight)
-    print "Merged list is {}\n".format(mergedList)
+#    print "Merged list is {}\n".format(mergedList)
     #Return merged list for next level of merging
     return mergedList
 
@@ -33,8 +42,8 @@ def merge(left, right):
     result = []
     global count
 
-    print "Left List {}\n".format(left)
-    print "Right List {}\n".format(right)
+#    print "Left List {}\n".format(left)
+#    print "Right List {}\n".format(right)
 
     #store lengths of lists
     lenL = len(left) #left
@@ -75,8 +84,8 @@ def merge(left, right):
     else:
         for j in range(R,lenR):
                 result.append(right[j])
-    print "Sub count {}".format(count)
+#    print "Sub count {}".format(count)
     return result                    
 
-splitList(test)
-print "Inversion count {}".format(count)
+splitList(inputList)
+print "Inversion count: {}".format(count)
