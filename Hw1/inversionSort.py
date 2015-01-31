@@ -4,50 +4,76 @@
 #file = open('filename.txt', 'r')
 #inputList.append(file.readline())
 
-test = [6,5,4,3]
+test = [6,5,4,3,2,1]
 
 def splitList(inputList):
-        length = len(inputList)
 
-	#base case of 1 element
-        if length <= 1:
-                return inputList
+    ##Splitting Section##
+    print "List to be split {}\n".format(inputList)
+    length = len(inputList)
 
-        leftList = [inputList[i] for i in range(0,length/2)]
-        rightList = [inputList[j] for j in range(length/2,length)]
-        subLeft = splitList(leftList)
-        print "Left list is {}\n".format(subLeft)
-        subRight = splitList(rightList)
-        print "Right list is {}\n".format(subRight)
-        mergedList = merge(subLeft, subRight)
-        print "Merged list is {}\n".format(mergedList)
-        return mergedList
+	#Base case of 1 element
+    if length <= 1:
+        return inputList
 
+    #Divide list into halves
+    leftList = [inputList[i] for i in range(0,length/2)]
+    rightList = [inputList[j] for j in range(length/2,length)]
+
+    #Recursively split left and right lists
+    subLeft = splitList(leftList)
+    subRight = splitList(rightList)
+
+    ##Merge Section##
+    #Call merge function using recursively split lists
+    mergedList = merge(subLeft, subRight)
+    print "Merged list is {}\n".format(mergedList)
+    #Return merged list for next level of merging
+    return mergedList
 
 def merge(left, right):
-        result = []
-        print "LEFT = {}".format(left)
-        print "RIGHT = {}".format(right)
-        #for base case elements of 1
-        if (len(left) and len(right)) == 1:
-                if left[0] < right[0]:
-                        result.append(left[0])
-                        result.append(right[0])
-                else:
-                        #HERE BE INVERSIONS
-                        result.append(right[0])
-                        result.append(left[0])
-        elif len(left) == len(right):
-                for i in range(0,len(left)-1):
-                        if left[i] < right[i]:
-                                result.append(left[i])
-                                result.append(right[i])
-                        else:
-                                #HERE BE INVERSIONS
-                                result.append(right[i])
-                                result.append(left[i])
-        return result                    
+    result = []
 
+    print "Left List {}\n".format(left)
+    print "Right List {}\n".format(right)
 
+    #store lengths of lists
+    lenL = len(left) #left
+    lenR = len(right) #right
+    lenK = lenL + lenR #result
+
+    #Keeps track of progress thru list
+    L = 0 #left
+    R = 0 #right
+    K = 0 #result
+
+    #Keeps result list from overflowing
+    while (K < lenK):
+        #Checks to see if left or right lists are completed
+        #Useful for if one list is completely smaller than other and
+        #for odd number of elements in a list
+        if (L >= lenL) or (R >= lenR):
+            break
+
+        #Compares left list index value to right list index value
+        #Appends to resulting list, then increments markers
+        if left[L] < right[R]:
+            result.append(left[L])
+            L += 1
+            K += 1
+        if left[L] > right[R]:
+            result.append(right[R])
+            R += 1
+            K += 1
+
+    #In the event that one list is completed, fills result list
+    #with remainder list
+    if L < R:
+        for i in range(L,lenL):
+                result.append(left[i])
+    else:
+        for j in range(K,lenR):
+                result.append(right[j])
+    return result                    
 
 splitList(test)
