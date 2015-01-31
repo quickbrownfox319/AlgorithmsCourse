@@ -4,15 +4,17 @@
 #file = open('filename.txt', 'r')
 #inputList.append(file.readline())
 
-test = [3,1,3,5]
+test = [4, 8, 1, 1, 2, 5, 7, 6]
 
 def splitList(inputList):
 
+    #count inversions
+    count = 0
     ##Splitting Section##
     print "List to be split {}\n".format(inputList)
     length = len(inputList)
 
-	#Base case of 1 element
+    #Base case of 1 element
     if length <= 1:
         return inputList
 
@@ -36,6 +38,9 @@ def merge(left, right):
 
     print "Left List {}\n".format(left)
     print "Right List {}\n".format(right)
+
+    #count inversions
+    count = 0
 
     #store lengths of lists
     lenL = len(left) #left
@@ -64,6 +69,8 @@ def merge(left, right):
             K += 1
         elif left[L] >= right[R]:
             result.append(right[R])
+            count += 1
+            print "count: {}\n".format(count)
             R += 1
             K += 1
 
