@@ -2,15 +2,9 @@
 
 #test = [5,2,4,2,1]
 
-rawInput = []
 inputList = []
-file = open('IntegerArray.txt', 'r')
-rawInput.append(file.readlines())
-for i in range(len(rawInput)):
-    rawInput[i].strip().split(',')
-    inputList.append(int(rawInput[i]))
-
-file.close()
+with open('IntegerArray.txt') as file:
+    inputList = file.read().splitlines()
 
 count = 0
 def splitList(inputList):
