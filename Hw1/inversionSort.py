@@ -5,6 +5,8 @@
 inputList = []
 with open('IntegerArray.txt') as file:
     inputList = file.read().splitlines()
+for i in range(len(inputList)):
+    inputList[i] = int(inputList[i])
 
 count = 0
 def splitList(inputList):
@@ -65,7 +67,7 @@ def merge(left, right):
             L += 1
             K += 1
         elif left[L] >= right[R]:
-            count += 1
+            count += (lenL - L) #
             result.append(right[R])
             R += 1
             K += 1  
